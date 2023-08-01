@@ -1,0 +1,119 @@
+#!/bin/bash
+
+#python main.py 00033 19 >> out00033_19_10k.txt
+#python main.py 00034 3 >> out00034_3.txt
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 2 sptracking2_ransac --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype ransac
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 2 sptracking1_ransac --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype ransac
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 2 sptracking2_bf --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype bruteforce
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 2 sptracking1_bf --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype bruteforce
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 13 sptracking1_sg --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sptracking2_disk --featuretype superpointmod --superpoint superpoint_tracking_v2/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 13 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_001 13 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_095 18 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_001 15 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_002 38 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_095 14 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_014 39 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_016 86 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_017 28 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py cecum_t2_a_under_review color_1440 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py desc_t4_a_under_review color_1440 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py sigmoid_t3_a_under_review color_1440 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t1_a_under_review color_1440 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t2_b_under_review color_1440 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py cecum_t2_a_under_review color_1440 sift_gm --featuretype sift --matchtype gm
+#python /home/leon/repositories/supercolmap/main_v2.py desc_t4_a_under_review color_1440 sift_gm --featuretype sift --matchtype gm
+#python /home/leon/repositories/supercolmap/main_v2.py sigmoid_t3_a_under_review color_1440 sift_gm --featuretype sift --matchtype gm
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t1_a_under_review color_1440 sift_gm --featuretype sift --matchtype gm
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t2_b_under_review color_1440 sift_gm --featuretype sift --matchtype gm
+#python /home/leon/repositories/supercolmap/main_v2.py cecum_t2_a_under_review color_1440 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py desc_t4_a_under_review color_1440 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py sigmoid_t3_a_under_review color_1440 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t1_a_under_review color_1440 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t2_b_under_review color_1440 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main.py cecum_t2_a_under_review color_1440 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap --reperror 2
+#python /home/leon/repositories/supercolmap/main.py desc_t4_a_under_review color_1440 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap --reperror 2
+#python /home/leon/repositories/supercolmap/main.py sigmoid_t3_a_under_review color_1440 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap --reperror 2
+#python /home/leon/repositories/supercolmap/main.py trans_t1_a_under_review color_1440 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap --reperror 2
+#python /home/leon/repositories/supercolmap/main.py trans_t2_b_under_review color_1440 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py cecum_t2_a_under_review color_1440 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py desc_t4_a_under_review color_1440 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py sigmoid_t3_a_under_review color_1440 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t1_a_under_review color_1440 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth --reperror 2
+#python /home/leon/repositories/supercolmap/main_v2.py trans_t2_b_under_review color_1440 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth --reperror 2
+python /home/leon/repositories/supercolmap/main_v2.py Seq_035_hd 0 sift_gm
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_035_hd 0 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_035_hd 0 sptracking3_disk --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_095 18 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_001 15 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_002 38 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_095 14 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_014 39 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_016 86 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main_v2.py Seq_017 28 sptracking3_sgh50 --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype superglue --superglue superglue_colmap_sptracking3_h50_lr5/model_epoch_3.pth
+#python /home/leon/repositories/supercolmap/main.py Seq_095 18 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_001 15 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_002 38 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_095 14 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_014 39 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_016 86 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main.py Seq_017 28 sptracking3_gm --featuretype superpointmod --superpoint superpoint_tracking_v3/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype colmap
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 em_disk --featuretype superpointmod --superpoint superpoint_em_v1/checkpoints/superPointNet_500000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sphomography1_disk --featuretype superpointmod --superpoint superpoint_homography_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sptracking1_disk --featuretype superpointmod --superpoint superpoint_tracking_v1/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 13 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sptracking4_disk --featuretype superpointmod --superpoint superpoint_tracking_v4/checkpoints/superPointNet_400000_checkpoint.pth.tar --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 13 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sp_sg --featuretype superpoint --matchtype superglue
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 13 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 18 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00033 15 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00034 38 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 00364 14 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02001 39 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02003 86 sp_disk --featuretype superpoint --matchtype disk
+#python /home/leon/repositories/supercolmap/main_v2.py 02005 28 sp_disk --featuretype superpoint --matchtype disk

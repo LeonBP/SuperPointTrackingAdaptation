@@ -1,0 +1,46 @@
+data:
+#    name: 'Uz_repeatability_dataset'
+    dataset: 'Uz_repeatability_dataset'
+#    dataset: 'hpatches'  # 'coco' 'hpatches'
+#    alteration: 'all'  # 'all' 'i' 'v'
+    preprocessing:
+        resize: [256,256]  # [240, 320] for HPatches and False for coco
+#        resize: [480, 640]  # [240, 320] for HPatches and False for coco
+    # labels: magicpoint_synth20_homoAdapt100_coco/predictions # for coco
+
+front_end_model: 'Val_model_heatmap'  # 'Train_model_frontend'
+model:
+    # name: 'magic_point'
+    name: 'SuperPointNet_pretrained' # SuperPointNet_heatmap
+    params: {
+    }
+
+    # learning_rate: 0.0001 # 0.0001
+    detection_threshold: 0.015 # 0.015
+
+    batch_size: 1
+    eval_batch_size: 1
+    # output parameters
+    learning_rate: 0.00001
+    detection_threshold: 0.015 # 0.001
+    nms: 1
+    top_k: 1000
+    nn_thresh: 1.5 # 0.7
+    homography_adaptation:
+        num: 0
+    subpixel: 
+        enable: False
+        patch_size: 5
+    rand_noise:
+        enable: false
+        sigma: 0.2
+    # pretrained: 'logs/superpoint_kitti_heat2_0/checkpoints/superPointNet_50000_checkpoint.pth.tar'
+    # pretrained: 'logs/superpoint_spollo_v0/checkpoints/superPointNet_40000_checkpoint.pth.tar'
+    # pretrained: 'logs/superpoint_coco/checkpoints/superPointNet_180_checkpoint.pth.tar'
+    # pretrained: 'logs/superpoint_coco_heat2_0/checkpoints/superPointNet_170000_checkpoint.pth.tar'
+    # pretrained: '/home/leon/Experiments/SuperPoint_pytorch/superpoint_ucluzlabel100_spec100pixels/checkpoints/superPointNet_200000_checkpoint.pth.tar'
+    # pretrained: '/home/leon/Experiments/SuperPoint_pytorch/superpoint_ucluzlabel100/checkpoints/superPointNet_200000_checkpoint.pth.tar'
+    pretrained: '/home/leon/Experiments/SuperPoint_pytorch/pretrained/superpoint_v1.pth'
+
+
+eval_iter: 1000
