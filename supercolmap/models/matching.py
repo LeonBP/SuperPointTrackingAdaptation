@@ -47,7 +47,9 @@ from .superpoint import SuperPoint
 from .SuperPointNet import SuperPointNet
 from .superglue import SuperGlue
 from .bruteforce import BruteForce
-from .disk import Disk
+from .bftorch import BFTorch
+from .lightglue import LightGlue
+from .superpoint_lg import SuperPoint_LG
 
 
 class Matching(torch.nn.Module):
@@ -57,6 +59,8 @@ class Matching(torch.nn.Module):
         config_sp = config.get('superpoint', {})
         if config_sp.get('featuretype') == 'superpoint':
             self.superpoint = SuperPoint(config_sp)
+        elif config_sp.get('featuretype') == 'superpoint_lg':
+            self.superpoint = SuperPoint_LG(**config_sp)
         else:
             self.superpoint = SuperPointNet(config_sp)
 
@@ -67,12 +71,14 @@ class Matching(torch.nn.Module):
         elif config_sg.get('matchtype') == 'bruteforce'\
                 or config_sg.get('matchtype') == 'ransac':
             self.superglue = BruteForce(config_sg)
-        elif config_sg.get('matchtype') == 'disk':
-            self.superglue = Disk(config_sg)
+        elif config_sg.get('matchtype') == 'bftorch':
+            self.superglue = BFTorch(config_sg)
+        elif config_sg.get('matchtype') == 'lightglue':
+            self.superglue = LightGlue(features=None, **config_sg)
         elif config_sg.get('matchtype') == 'colmap':
             self.colmap = True
 
-    def forward(self, data):
+    def forward(self, data, timer=None):
         """ Run SuperPoint (optionally) and SuperGlue
         SuperPoint is skipped if ['keypoints0', 'keypoints1'] exist in input
         Args:
@@ -84,14 +90,19 @@ class Matching(torch.nn.Module):
         if 'keypoints0' not in data:
             pred0 = self.superpoint({'image': data['image0'][:,:,:,205:-155]})
             pred = {**pred, **{k+'0': v for k, v in pred0.items()}}
+            # for k in pred:
+            #     print("sp0")
+            #     print(k,len(pred[k]),pred[k][0].size(),pred[k][0])
             pred['keypoints0'][0]=pred['keypoints0'][0]+torch.tensor([205,0]).to('cuda:0')
             #print(pred['keypoints0'][0].size())
+            timer.update('detector0')
         if 'keypoints1' not in data:
             pred1 = self.superpoint({'image': data['image1'][:,:,:,205:-155]})
             pred = {**pred, **{k+'1': v for k, v in pred1.items()}}
             pred['keypoints1'][0]=pred['keypoints1'][0]+torch.tensor([205,0]).to('cuda:0')
             #print(pred['keypoints1'])
             #print(pred['keypoints1'][0].size())
+            timer.update('detector1')
         # print(pred['semi0'].detach().cpu().numpy().dtype)
         # dla = pred['semi0'].detach()[0,:-1,:,:]
         # _, h, w = dla.shape
@@ -110,6 +121,20 @@ class Matching(torch.nn.Module):
 
         # Perform the matching
         if not self.colmap:
-            pred = {**pred, **self.superglue(data)}
+            if len(pred['keypoints0'][0]) > 0 and len(pred['keypoints1'][0]) > 0:
+                pred = {**pred, **self.superglue(data)}
+            else:
+                shape0, shape1 = data['keypoints0'].shape[:-1], data['keypoints1'].shape[:-1]
+                new_pred = {'matches0': data['keypoints0'].new_full(shape0, -1, dtype=torch.int),
+                            'matches1': data['keypoints1'].new_full(shape1, -1, dtype=torch.int),
+                            'matching_scores0': data['keypoints0'].new_zeros(shape0),
+                            'matching_scores1': data['keypoints1'].new_zeros(shape1),}
+                pred = {**pred, **new_pred}
+            # for k in pred:
+            #     print("sg")
+            #     if k == "stop":
+            #         print(k,pred[k])
+            #     else:
+            #         print(k,len(pred[k]),pred[k][0].size(),pred[k][0])
 
         return pred

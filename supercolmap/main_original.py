@@ -17,11 +17,12 @@ def triangulate(database_name, path_images, path_results):
                     '--Mapper.ba_refine_focal_length', '0',
                     '--Mapper.ba_refine_extra_params', '0',
                     '--Mapper.min_model_size', '50'])
-    if os.path.exists(path_results + '/0'):
-        subprocess.run([path_colmap, 'model_converter',
-                        '--input_path', path_results + '/0',
-                        '--output_path', path_results,
-                        '--output_type', 'TXT'])
+    for res in os.listdir(path_results):
+        if res.isdigit():
+            subprocess.run([path_colmap, 'model_converter',
+                            '--input_path', path_results + '/' + res,
+                            '--output_path', path_results + '/' + res,
+                            '--output_type', 'TXT'])
 
 
 def initialize_database(database_name, path_images, path_results):
@@ -145,6 +146,9 @@ if __name__ == "__main__":
             Save_database(database_name, path_images, path_results) #Saves the matches from superglue to colmap database
             subprocess.run([path_colmap, 'exhaustive_matcher', '--database_path', path_results+'/'+database_name])
             triangulate(database_name, path_images, path_results)  #Triangulates point and camera positions with colmap
+            for res in os.listdir(path_results):
+                if res.isdigit():
+                    T = cm.print_camera_positions(path_results + '/' + res)  # Print results of camera positions
             # exit(1)
     f.close()
     # T = cm.print_camera_positions(path_results)  #Print results of camera positiosn

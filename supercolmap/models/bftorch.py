@@ -195,7 +195,7 @@ def distance_matrix(fs1: ['N', 'F'], fs2: ['M', 'F']) -> ['N', 'M']:
     '''
     return SQRT_2 * (1. - fs1 @ fs2.T).clamp(min=1e-6).sqrt()
 
-class Disk(nn.Module):
+class BFTorch(nn.Module):
     default_config = {
         'detector': 'superpoint',
         'matrix': 'E'

@@ -179,7 +179,7 @@ def remove_borders(keypoints, scores, border: int, height: int, width: int, bord
     mask_h = (keypoints[:, 0] >= border) & (keypoints[:, 0] < (height - border))
     mask_w = (keypoints[:, 1] >= border) & (keypoints[:, 1] < (width - border))
     kps=keypoints.cpu().numpy()
-    mask_border = torch.tensor(bordermask[kps[:,0],kps[:,1]]>127).to('cuda:0')
+    mask_border = torch.tensor(bordermask[kps[:,0],kps[:,1]]>127).to('cuda:0') if bordermask is not None else torch.ones_like(mask_h).to('cuda:0')
     #print(mask_border.size(),mask_border)
     mask = mask_h & mask_w & mask_border
     return keypoints[mask], scores[mask]
@@ -280,7 +280,7 @@ class SuperPointNet(nn.Module):
         checkpoint = torch.load(path)
         self.load_state_dict(checkpoint['model_state_dict'], strict=False)
 
-        self.bordermask = cv2.imread("/media/discoGordo/dataset_leon/UZ/masks/HCULB_1080_mask_eq.png",cv2.IMREAD_GRAYSCALE)
+        self.bordermask = cv2.imread("assets/HCULB_1080_mask_eq.png",cv2.IMREAD_GRAYSCALE)
 
         mk = self.config['max_keypoints']
         if mk == 0 or mk < -1:

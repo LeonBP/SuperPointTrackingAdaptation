@@ -303,6 +303,7 @@ def extractInfo(path_model):
 
     cameras, images, points3D = read_model(path=path_model, ext=ext)
 
+    print("path:", path_model)
     print("num_cameras:", len(cameras))
     print("num_images:", len(images))
     print("num_points3D:", len(points3D))

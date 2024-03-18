@@ -249,6 +249,11 @@ class COLMAPDatabase(sqlite3.Connection):
             '''SELECT * from keypoints''')
         return rows.fetchall()
 
+    def get_num_all_keypoints(self):
+        rows = self.execute(
+            '''SELECT rows from keypoints''')
+        return rows.fetchall()
+
     def get_num_keypoints_id(self, id):
         rows = self.execute(
             '''SELECT rows from keypoints  
@@ -306,6 +311,11 @@ class COLMAPDatabase(sqlite3.Connection):
             '''SELECT * from descriptors''')
         return rows.fetchall()
 
+    def get_num_all_descriptors(self):
+        rows = self.execute(
+            '''SELECT rows from descriptors''')
+        return rows.fetchall()
+
     def add_matches(self, image_id1, image_id2, matches):
         assert(len(matches.shape) == 2)
         assert(matches.shape[1] == 2)
@@ -356,6 +366,11 @@ class COLMAPDatabase(sqlite3.Connection):
     def get_all_matches(self):
         rows = self.execute(
             '''SELECT * from matches''')
+        return rows.fetchall()
+
+    def get_num_all_matches(self):
+        rows = self.execute(
+            '''SELECT rows from matches''')
         return rows.fetchall()
 
     def delete_desc(self):

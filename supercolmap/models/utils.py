@@ -75,7 +75,7 @@ class AverageTimer:
         now = time.time()
         dt = now - self.last_time
         if name in self.times:
-            dt = self.smoothing * dt + (1 - self.smoothing) * self.times[name]
+            dt = dt#self.smoothing * dt + (1 - self.smoothing) * self.times[name]
         self.times[name] = dt
         self.will_print[name] = True
         self.last_time = now

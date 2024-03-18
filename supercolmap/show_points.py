@@ -92,14 +92,14 @@ if __name__ == '__main__':
         help='Resize the image after casting uint8 to float')
 
     parser.add_argument(
-        '--featuretype', choices={'superpoint', 'superpointmod','superpoint_lg'}, default='superpoint',
+        '--featuretype', choices={'superpoint', 'superpointmod'}, default='superpoint',
         help='Feature extraction strategy')
     parser.add_argument(
         '--superpoint', type=str,
         default='superpoint_ucluzlabel100_specga_9-4_d3/checkpoints/superPointNet_200000_checkpoint.pth.tar',
         help='SuperPoint modified weights')
     parser.add_argument(
-        '--matchtype', choices={'superglue', 'bruteforce', 'ransac', 'bftorch', 'colmap', 'lightglue'}, default='superglue',
+        '--matchtype', choices={'superglue', 'bruteforce', 'ransac', 'bftorch', 'colmap'}, default='superglue',
         help='Matching strategy')
     # parser.add_argument(
     #     '--superglue', choices={'indoor', 'outdoor'}, default='indoor',
@@ -228,11 +228,8 @@ if __name__ == '__main__':
         name0, name1 = pair[:2]
         stem0, stem1 = Path(name0).stem, Path(name1).stem
         matches_path = output_dir / '{}_{}_matches.npz'.format(stem0, stem1)
-        if matches_path.exists():
-            # print('Skipping, output file already exists: %s' % matches_path)
-            continue
         eval_path = output_dir / '{}_{}_evaluation.npz'.format(stem0, stem1)
-        viz_path = output_dir / '{}_{}_matches.{}'.format(stem0, stem1, opt.viz_extension)
+        viz_path = output_dir / '{}.{}'.format(opt.superpoint[:-8].replace("/","-"), opt.viz_extension)
         viz_eval_path = output_dir / \
             '{}_{}_evaluation.{}'.format(stem0, stem1, opt.viz_extension)
 
@@ -298,11 +295,10 @@ if __name__ == '__main__':
         #cv2.imwrite("/home/leon/Experiments/output/endomapper/MIDL2022/img_from_colmap.png",inp0.detach().cpu().numpy()[0,0,:,205:-155]*255.)
         if do_match:
             # Perform the matching.
-            pred = matching({'image0': inp0, 'image1': inp1}, timer)
+            pred = matching({'image0': inp0, 'image1': inp1})
             pred = {k: v[0].cpu().numpy() for k, v in pred.items()}
             kpts0, kpts1 = pred['keypoints0'], pred['keypoints1']
             descs0, descs1 = pred['descriptors0'], pred['descriptors1']
-            scores0, scores1 = pred['scores0'], pred['scores1']
             if opt.matchtype != 'colmap':
                 matches, conf = pred['matches0'], pred['matching_scores0']
             #print(kpts0.shape)
@@ -315,9 +311,8 @@ if __name__ == '__main__':
                                'matches': matches, 'match_confidence': conf}
             else:
                 out_matches = {'keypoints0': kpts0, 'keypoints1': kpts1,
-                               'descriptors0': descs0, 'descriptors1': descs1,
-                               'scores0': scores0, 'scores1': scores1}
-            np.savez(str(matches_path), **out_matches)
+                               'descriptors0': descs0, 'descriptors1': descs1}
+            # np.savez(str(matches_path), **out_matches)
 
         if opt.matchtype != 'colmap':
             # Keep the matching keypoints.
@@ -326,10 +321,11 @@ if __name__ == '__main__':
             mkpts1 = kpts1[matches[valid]]
             mconf = conf[valid]
         else:
-            timer.print('Finished pair {:5} of {:5}'.format(i, len(pairs)))
-            continue
+            mkpts0 = np.array([[0,0]])
+            mkpts1 = np.array([[0,0]])
+            mconf = [1]
 
-        if do_eval:
+        '''if do_eval:
             # Estimate the pose and compute the pose error.
             assert len(pair) == 38, 'Pair does not have ground truth info'
             K0 = np.array(pair[4:13]).astype(float).reshape(3, 3)
@@ -375,7 +371,7 @@ if __name__ == '__main__':
                         'num_correct': num_correct,
                         'epipolar_errors': epi_errs}
             np.savez(str(eval_path), **out_eval)
-            timer.update('eval')
+            timer.update('eval')'''
 
         if do_viz or i < 10:
             # Visualize the matches.
@@ -390,7 +386,7 @@ if __name__ == '__main__':
 
             # Display extra parameter info.
             k_thresh = matching.superpoint.config['keypoint_threshold']
-            m_thresh = matching.superglue.config['match_threshold']
+            m_thresh = 1#matching.superglue.config['match_threshold']
             small_text = [
                 'Keypoint Threshold: {:.4f}'.format(k_thresh),
                 'Match Threshold: {:.2f}'.format(m_thresh),
@@ -404,7 +400,7 @@ if __name__ == '__main__':
 
             timer.update('viz_match')
 
-        if do_viz_eval:
+        '''if do_viz_eval:
             # Visualize the evaluation results for the image pair.
             color = np.clip((epi_errs - 0) / (1e-3 - 0), 0, 1)
             color = error_colormap(1 - color)
@@ -436,11 +432,12 @@ if __name__ == '__main__':
                 opt.show_keypoints, opt.fast_viz,
                 opt.opencv_display, 'Relative Pose', small_text)
 
-            timer.update('viz_eval')
+            timer.update('viz_eval')'''
 
         timer.print('Finished pair {:5} of {:5}'.format(i, len(pairs)))
+        exit(1)
 
-    if opt.eval:
+    '''if opt.eval:
         # Collate the results into a final table and print to terminal.
         pose_errors = []
         precisions = []
@@ -463,4 +460,4 @@ if __name__ == '__main__':
         print('Evaluation Results (mean over {} pairs):'.format(len(pairs)))
         print('AUC@5\t AUC@10\t AUC@20\t Prec\t MScore\t')
         print('{:.2f}\t {:.2f}\t {:.2f}\t {:.2f}\t {:.2f}\t'.format(
-            aucs[0], aucs[1], aucs[2], prec, ms))
+            aucs[0], aucs[1], aucs[2], prec, ms))'''
