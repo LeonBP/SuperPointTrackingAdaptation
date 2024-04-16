@@ -74,7 +74,10 @@ class Matching(torch.nn.Module):
         elif config_sg.get('matchtype') == 'bftorch':
             self.superglue = BFTorch(config_sg)
         elif config_sg.get('matchtype') == 'lightglue':
-            self.superglue = LightGlue(**config_sg)
+            if 'lightglue' in config_sg.get('superglue'):
+                self.superglue = LightGlue(**config_sg)
+            else:
+                self.superglue = LightGlue(features=None, **config_sg)
         elif config_sg.get('matchtype') == 'colmap':
             self.colmap = True
 
